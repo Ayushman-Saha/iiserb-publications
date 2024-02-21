@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react'
 
 const data = [
   {
@@ -28,12 +28,45 @@ const data = [
                 "journal" : "Test journal",
                 "title" : "Test publication"
 
+            },
+            {
+                "year" : 2023,
+                "type" : "conference",
+                "journal" : "Test conference",
+                "title" : "Test publication"
+
+            },
+            {
+                "year" : 2022,
+                "type" : "journal",
+                "journal" : "Test journal",
+                "title" : "Test publication"
+
+            },
+            {
+                "year" : 2021,
+                "type" : "Conference",
+                "journal" : "Test conference",
+                "title" : "Test publication"
+
+            },
+            {
+                "year" : 2021,
+                "type" : "Conference",
+                "journal" : "Test conference",
+                "title" : "Test publication"
+
             }
         ],
         patents : [
             {
                 "year" : 2022,
                 "status" : "filed",
+                "title" : "Patent title",
+            },
+            {
+                "year" : 2018,
+                "status" : "Accepted",
                 "title" : "Patent title",
             }
         ],
@@ -45,8 +78,8 @@ const data = [
         ],
         books:[
           {
-            "title" : "book title",
-            "publication" : "book publication"
+            "title" : "Book title",
+            "publication" : "Book publication"
 
           }
         ],
@@ -160,6 +193,62 @@ export default function Table() {
             </button>
           </div>
         </div>
+
+        <div className="mb-5 mt-6 flex items-center border-b-2 border-gray-100 pb-5 flex-wrap">
+        <div className="flex w-full items-center space-x-2 md:w-1/3">
+            <input
+                className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                type="name"
+                placeholder="Search for publications"
+            ></input>
+            <button
+                type="button"
+                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+                Search
+            </button>
+            </div>
+              <div className="lg:ml-auto flex items-center my-2">
+                <span className="mr-3 text-sm font-semibold">Publication Type</span>
+                <div className="relative">
+                  <select className="appearance-none rounded border border-gray-300 py-2 pl-3 pr-10 text-sm focus:border-black focus:outline-none focus:ring-black">
+                    <option>All</option>
+                    <option>Conference</option>
+                    <option>Journal</option>
+                  </select>
+                  <span className="pointer-events-none absolute right-0 top-0 flex h-full w-10 items-center justify-center text-center text-gray-600">
+                    <ChevronDown size={16} />
+                  </span>
+                </div>
+              </div>
+              <div className="lg:ml-auto flex items-center my-2">
+                <span className="mr-3 text-sm font-semibold">Patent Type</span>
+                <div className="relative">
+                  <select className="appearance-none rounded border border-gray-300 py-2 pl-3 pr-10 text-sm focus:border-black focus:outline-none focus:ring-black">
+                    <option>All</option>
+                    <option>Filed</option>
+                    <option>Accepted</option>
+                  </select>
+                  <span className="pointer-events-none absolute right-0 top-0 flex h-full w-10 items-center justify-center text-center text-gray-600">
+                    <ChevronDown size={16} />
+                  </span>
+                </div>
+              </div>
+              <div className="lg:ml-auto flex items-center my-2">
+                <span className="mr-3 text-sm font-semibold">Department</span>
+                <div className="relative">
+                  <select className="appearance-none rounded border border-gray-300 py-2 pl-3 pr-10 text-sm focus:border-black focus:outline-none focus:ring-black">
+                    <option>All</option>
+                    <option>Data Science and Engineering</option>
+                    <option>Economics</option>
+                  </select>
+                  <span className="pointer-events-none absolute right-0 top-0 flex h-full w-10 items-center justify-center text-center text-gray-600">
+                    <ChevronDown size={16} />
+                  </span>
+                </div>
+              </div>
+            </div>
+
         <div className="mt-6 flex flex-col">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -242,15 +331,26 @@ export default function Table() {
                             <td className="whitespace-nowrap px-4 py-4 ">
                                 {faculty.publications.map((publication) => {
                                     return (
+                                        <>
                                         <div key={faculty.publications.indexOf(publication)} className="my-4 mb-8">
-                                        <div className="text-sm text-gray-900">{`${faculty.publications.indexOf(publication) + 1}. ${publication.title}`}</div>
+                                            {(faculty.publications.indexOf(publication) <= 4)? 
+                                            <>
+                                            <div className="text-sm text-gray-900">{`${faculty.publications.indexOf(publication) + 1}. ${publication.title}`}</div>
                                         <div className="text-sm text-gray-500">{publication.journal}</div>
                                         <div className="text-sm text-gray-500">{publication.year}</div>
                                         <div className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 capitalize divide-x-2 divide-gray-200">{publication.type}</div>
+                                            </> 
+                                            : <></>}
+                                        
                                         </div>
+                                        {(faculty.publications.length > 5 && faculty.publications.indexOf(publication) === 4) ?
+                                            <a className='underline text-sm font-semibold' href='#'>See More</a>:
+                                            <></>
+                                        }
+                                        </>
+                                        
                                     )
                                 })}
-                              
                             </td>
                             <td className="whitespace-nowrap px-4 py-4 ">
                                 {(faculty.patents != undefined) ? faculty.patents.map((patent) => {
@@ -291,32 +391,32 @@ export default function Table() {
                             <td className="whitespace-nowrap px-4 py-4  border-r border-gray-200">
                               <div className="flex flex-col"> {/* Nested column */}
                                 <div className="mb-4"> {/* Each item in the nested column */} 
-                                  <h3 className="text-sm">Graduated</h3>
+                                  <h3 className="text-sm underline">Graduated</h3>
                                     {faculty.students.map((student) => {
                                         return (
-                                            <tr key={faculty.students.indexOf(student)} className="my-4 mb-8">
+                                            <tr key={faculty.students.indexOf(student)} className="my-8">
                                               
                                                 <td>
-                                                <div className="text-sm text-gray-500">PhD: {student.grad_phd}</div>
+                                                <div className="text-sm text-gray-500 mr-4">PhD: {student.grad_phd}</div>
                                                 </td>
                                                 
                                                 <td>
-                                                <div className="text-sm text-gray-500">MS: {student.grad_ms}</div>
+                                                <div className="text-sm text-gray-500 mx-4">MS: {student.grad_ms}</div>
                                                 </td>
                                             </tr>
                                         )
                                     })}
                                   </div>
                                   <div className="mb-4"> {/* Each item in the nested column */} 
-                                  <h3 className="text-sm">Ongoing</h3>
+                                  <h3 className="text-sm underline">Ongoing</h3>
                                     {faculty.students.map((student) => {
                                         return (
-                                            <tr key={faculty.students.indexOf(student)} className="my-4 mb-8">
+                                            <tr key={faculty.students.indexOf(student)} className="my-8">
                                                 <td>
-                                                <div className="text-sm text-gray-500">PhD: {student.ongoing_phd}</div>
+                                                <div className="text-sm text-gray-500 mr-4">PhD: {student.ongoing_phd}</div>
                                                 </td>
                                                 <td>
-                                                <div className="text-sm text-gray-500">MS:{student.ongoing_ms}</div>
+                                                <div className="text-sm text-gray-500 mx-4">MS:{student.ongoing_ms}</div>
                                                 </td>
                                             </tr>
                                         )
