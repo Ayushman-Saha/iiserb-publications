@@ -54,11 +54,23 @@ const data = [
           {
             "grad_phd" : 5,
             "grad_ms" : 40,
-            "ongoing_phd" : 9,
+            "ongoing_phd" : 5,
             "ongoing_ms" : 50
           }
-        ]
+        ],
+        graduated_students:[
+          {
+            "phd" : 5,
+            "ms" : 40
 
+          }
+        ],
+        ongoing_students:[
+          {
+            "phd" : 9,
+            "ms" : 50
+          }
+        ]
       },
       {
         name: 'Jane Doe',
@@ -81,7 +93,9 @@ const data = [
         patent: [],
         grants:[],
         books:[],
-        students:[]
+        students:[],
+        graduated_students:[],
+        ongoing_students:[]
       },
       
     ],
@@ -271,7 +285,8 @@ export default function Table() {
                                         <div key={faculty.publications.indexOf(grant)} className="my-4 mb-8">
                                         <div className="text-sm text-gray-900">{`${faculty.grants.indexOf(grant) + 1}. ${grant.grant_name}`}</div>
                                         <div className="text-sm text-gray-500">{grant.amount}</div>
-                                        
+                                        {/* <div className="text-sm text-gray-500">{patent.year}</div> */}
+                                        {/* <div className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 capitalize divide-x-2 divide-gray-200">{patent.status}</div> */}
                                         </div>
                                     )
                                 }): <></>}
@@ -282,48 +297,50 @@ export default function Table() {
                                     return (
                                         <div key={faculty.books.indexOf(book)} className="my-4 mb-8">
                                         <div className="text-sm text-gray-900">{`${faculty.books.indexOf(book) + 1}. ${book.title}`}</div>
+                                        {/* <div className="text-sm text-gray-500">{book.title}</div> */}
                                         <div className="text-sm text-gray-500">{book.publication}</div>
+                                        {/* <div className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 capitalize divide-x-2 divide-gray-200">{publication.type}</div> */}
                                         </div>
                                     )
                                 })}
                               
                             </td>
-                            <td className="whitespace-nowrap px-4 py-4  border-r border-gray-200">
-                              <div className="flex flex-col"> {/* Nested column */}
-                                <div className="mb-4"> {/* Each item in the nested column */} 
-                                  <h3 className="text-sm">Graduated</h3>
-                                    {faculty.students.map((student) => {
-                                        return (
-                                            <tr key={faculty.students.indexOf(student)} className="my-4 mb-8">
-                                              
-                                                <td>
-                                                <div className="text-sm text-gray-500">PhD: {student.grad_phd}</div>
-                                                </td>
-                                                
-                                                <td>
-                                                <div className="text-sm text-gray-500">MS: {student.grad_ms}</div>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                  </div>
-                                  <div className="mb-4"> {/* Each item in the nested column */} 
-                                  <h3 className="text-sm">Ongoing</h3>
-                                    {faculty.students.map((student) => {
-                                        return (
-                                            <tr key={faculty.students.indexOf(student)} className="my-4 mb-8">
-                                                <td>
-                                                <div className="text-sm text-gray-500">PhD: {student.ongoing_phd}</div>
-                                                </td>
-                                                <td>
-                                                <div className="text-sm text-gray-500">MS:{student.ongoing_ms}</div>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                  </div>
-                                </div>
+                            <td className="whitespace-nowrap px-4 py-4 ">
+                                {faculty.students.map((student) => {
+                                    return (
+                                        <tr key={faculty.students.indexOf(student)} className="my-4 mb-8">
+                                          {/* <tr className="flex"> */}
+                                            {/* <div className="text-sm text-gray-900">{`${faculty.graduated_students.indexOf(grad_student) + 1}. ${grad_student.phd}`}</div> */}
+                                            <td>
+                                            <div className="text-sm text-gray-500">{student.grad_phd}</div>
+                                            </td>
+                                            {/* <div className="h-4 bg-gray-400 w-1"></div> Vertical line */}
+                                            <td>
+                                            <div className="text-sm text-gray-500">{student.grad_ms}</div>
+                                            </td>
+                                            {/* <div className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 capitalize divide-x-2 divide-gray-200">{publication.type}</div> */}
+                                          {/* </tr> */}
+                                        </tr>
+                                    )
+                                })}
                               
+                            </td>
+                            {/* <td className="whitespace-nowrap px-4 py-4 ">
+                                {faculty.ongoing_students.map((ongoing) => {
+                                    return (
+                                        <div key={faculty.ongoing_students.indexOf(ongoing)} className="my-4 mb-8"> */}
+                                        {/* <div className="text-sm text-gray-900">{`${faculty.ongoing_students.indexOf(ongoing) + 1}. ${ongoing.phd}`}</div> */}
+                                        {/* <div className="text-sm text-gray-500">{ongoing.ms}</div>
+                                        <div className="text-sm text-gray-500">{ongoing.phd}</div> */}
+                                        {/* <div className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 capitalize divide-x-2 divide-gray-200">{publication.type}</div> */}
+                                        {/* </div>
+                                    )
+                                })}
+                              
+                            </td> */}
+
+                            <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
+                              {faculty.role}
                             </td>
                           </tr>
                         ))}
