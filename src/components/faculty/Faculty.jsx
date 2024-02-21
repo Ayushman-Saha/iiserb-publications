@@ -47,6 +47,11 @@ const facultyData = [
             "status" : "accepted",
             "department" : "dse"
           }
+        ],
+        "grants" : [
+            {
+                
+            }
         ]
     }
 ]

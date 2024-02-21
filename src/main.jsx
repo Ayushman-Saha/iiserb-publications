@@ -4,8 +4,8 @@ import Layout from './Layout.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './components/home/Home.jsx'
-import Department from './components/departments/Department.jsx'
-import Faculty from './components/faculty/Faculty.jsx'
+// import Department from './components/departments/Department.jsx'
+// import Faculty from './components/faculty/Faculty.jsx'
 
 const router = createBrowserRouter([
     {
@@ -15,14 +15,6 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Home/>
-            },
-            {
-                path: "dept/:dept",
-                element: <Department/>
-            },
-            {
-                path: "dept/:id/faculty/:profId",
-                element: <Faculty/>
             }
         ]
 
